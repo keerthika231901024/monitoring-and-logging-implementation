@@ -107,3 +107,10 @@
 2026-02-18T07:01:37.316599 | 8XUhzjsWlzcF | keerthi | uploaded_and_organized | sample1.txt | success | sample1.txt moved to Documents folder • 2 old copies removed from Downloads and Uploads
 2026-02-18T07:01:37.330089 | 8XUhzjsWlzcF | keerthi | organization_summary | sample1.txt | success | sample1.txt → C:/Users/idpuser/Documents\sample1.txt | Destination duplicates: 1 removed | System-wide duplicates: 2 removed | Total cleaned: 3
 2026-02-18T07:01:37.344753 | 8XUhzjsWlzcF | keerthi | file_organization_confirmed | sample1.txt | success | File successfully organized: ✓ sample1.txt moved to Documents folder • 2 old copies removed from Downloads and Uploads | System-wide duplicates: 2 | Total removed: 3
+2026-02-18T07:15:29.918148 | 8XUhzjsWlzcF | keerthi | smart_folder_scan | Downloads | success | Scanned C:\Users\idpuser\Downloads | Total: 15 | Duplicates: 0 | Unwanted: 0 | Empty: 0
+2026-02-18T07:15:49.786042 | 8XUhzjsWlzcF | keerthi | smart_folder_scan | Desktop | success | Scanned C:\Users\idpuser\Desktop | Total: 167 | Duplicates: 8 | Unwanted: 0 | Empty: 0
+2026-02-18T07:15:56.770342 | 8XUhzjsWlzcF | keerthi | smart_folder_scan | Desktop | success | Scanned C:\Users\idpuser\Desktop | Total: 167 | Duplicates: 8 | Unwanted: 0 | Empty: 0
+2026-02-18T07:19:02.314442 | 8XUhzjsWlzcF | keerthi | smart_folder_scan | Downloads | success | Scanned C:\Users\idpuser\Downloads | Total: 16 | Duplicates: 1 | Unwanted: 0 | Empty: 0
+2026-02-18T07:19:10.572787 | 8XUhzjsWlzcF | keerthi | smart_folder_delete | boy.jpg | success | Deleted duplicate: C:\Users\idpuser\Downloads\boy.jpg
+2026-02-18T07:19:10.610068 | 8XUhzjsWlzcF | keerthi | smart_folder_clean | Downloads | success | Cleaned C:\Users\idpuser\Downloads | Duplicate files removed: 1 | Failed: 0
+2026-02-18T07:19:19.194846 | 8XUhzjsWlzcF | keerthi | smart_folder_scan | Downloads | success | Scanned C:\Users\idpuser\Downloads | Total: 15 | Duplicates: 0 | Unwanted: 0 | Empty: 0

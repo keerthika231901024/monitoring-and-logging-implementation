@@ -11,6 +11,7 @@ from database_manager import DatabaseManager
 from logger import LogManager
 from organizer import FileOrganizer
 from project_organizer import SmartProjectOrganizer
+from smart_folder_analyzer import SmartFolderAnalyzer
 from system_monitor import SystemMonitor
 from file_monitor import FileMonitor
 from file_manager import FileManager
@@ -38,6 +39,7 @@ project_organizer = SmartProjectOrganizer(logger)
 monitor = SystemMonitor(db, logger)
 file_monitor = FileMonitor(logger)
 file_manager = FileManager(logger, db)
+folder_analyzer = SmartFolderAnalyzer(logger)
 
 
 db.initialize()
@@ -150,6 +152,8 @@ def dashboard():
     is_monitoring = file_monitor.is_monitoring(username, session_id)
     event_count = file_monitor.get_event_count(username, session_id)
     monitored_folder = session.get("monitored_folder", "No folder selected")
+    smart_folder_analysis = session.get("smart_folder_analysis")
+    smart_folder_path = session.get("smart_folder_path", "")
     return render_template(
         "dashboard.html",
         stats=stats,
@@ -163,7 +167,92 @@ def dashboard():
         is_monitoring=is_monitoring,
         event_count=event_count,
         monitored_folder=monitored_folder,
+        smart_folder_analysis=smart_folder_analysis,
+        smart_folder_path=smart_folder_path,
     )
+
+
+@app.route("/analyze_folder", methods=["POST"])
+@login_required
+def analyze_folder():
+    session_id = ensure_session_id()
+    username = session.get("username", "")
+    folder_path = request.form.get("analyze_folder_path", "").strip()
+    include_large = request.form.get("include_large") == "on"
+
+    if not folder_path:
+        flash("Enter a folder path to analyze.", "error")
+        return redirect(url_for("dashboard"))
+
+    if not os.path.isdir(folder_path):
+        flash("Folder not found or not accessible.", "error")
+        return redirect(url_for("dashboard"))
+
+    results = folder_analyzer.scan_folder(folder_path, include_large=include_large)
+
+    session["smart_folder_analysis"] = results
+    session["smart_folder_path"] = folder_path
+
+    logger.log(
+        username,
+        "smart_folder_scan",
+        os.path.basename(folder_path),
+        "success",
+        f"Scanned {folder_path} | Total: {results['total_files']} | Duplicates: {results['duplicate_count']} | Unwanted: {results['unwanted_count']} | Empty: {results['empty_count']}",
+        session_id,
+    )
+
+    flash("Folder scan completed.", "success")
+    return redirect(url_for("dashboard"))
+
+
+@app.route("/clean_folder", methods=["POST"])
+@login_required
+def clean_folder():
+    session_id = ensure_session_id()
+    username = session.get("username", "")
+    folder_path = request.form.get("clean_folder_path", "").strip()
+    include_large = request.form.get("include_large") == "on"
+
+    if not folder_path:
+        flash("No folder specified for cleanup.", "error")
+        return redirect(url_for("dashboard"))
+
+    if not os.path.isdir(folder_path):
+        flash("Folder not found or not accessible.", "error")
+        return redirect(url_for("dashboard"))
+
+    scan_results, cleanup_summary = folder_analyzer.clean_folder(
+        folder_path,
+        username,
+        session_id,
+        include_large=include_large,
+    )
+
+    session["smart_folder_analysis"] = scan_results
+    session["smart_folder_path"] = folder_path
+
+    logger.log(
+        username,
+        "smart_folder_clean",
+        os.path.basename(folder_path),
+        "success",
+        f"Cleaned {folder_path} | Duplicate files removed: {cleanup_summary['deleted_count']} | Failed: {cleanup_summary['failed_count']}",
+        session_id,
+    )
+
+    if cleanup_summary["failed_count"] > 0:
+        flash(
+            f"{cleanup_summary['deleted_count']} duplicate files removed successfully. {cleanup_summary['failed_count']} failed.",
+            "warning",
+        )
+    else:
+        flash(
+            f"{cleanup_summary['deleted_count']} duplicate files removed successfully.",
+            "success",
+        )
+
+    return redirect(url_for("dashboard"))
 
 
 @app.route("/upload", methods=["POST"])
