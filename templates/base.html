@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "Auto Organizer" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <div class="background-shape"></div>
+    <header class="top-bar">
+        <div class="brand">
+            <span class="brand-mark">AO</span>
+            <div>
+                <h1>Auto Organizer</h1>
+                <p>Business-grade file operations</p>
+            </div>
+        </div>
+        {% if session.get('user_id') %}
+        <nav class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            <a href="{{ url_for('organize') }}">Organizer</a>
+            <a href="{{ url_for('logs') }}">Monitor</a>
+            <a href="{{ url_for('logout') }}" class="outline">Logout</a>
+        </nav>
+        {% endif %}
+    </header>
+
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Automatic File Organizer and Monitoring System</p>
+    </footer>
+</body>
+</html>

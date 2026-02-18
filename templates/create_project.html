@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="create-project-container">
+    <div class="form-card">
+        <div class="form-header">
+            <h2>Create New Development Project</h2>
+            <p>Set up a new project with intelligent file organization structure</p>
+        </div>
+
+        <form method="POST" class="project-form">
+            <div class="form-group">
+                <label for="project_name">Project Name</label>
+                <input
+                    type="text"
+                    id="project_name"
+                    name="project_name"
+                    placeholder="e.g., my_awesome_app"
+                    required
+                    autofocus
+                />
+                <small>Project will be created in your Projects folder with automatic subfolder structure</small>
+            </div>
+
+            <div class="project-structure-preview">
+                <h3>Project Structure Created</h3>
+                <div class="folder-tree">
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">[Project Name]</span>
+                    </div>
+                    <div class="folder-item subfolder">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">backend</span>
+                        <span class="folder-desc">Python, Java, C++, JavaScript (Node), C#, Go</span>
+                    </div>
+                    <div class="folder-item subfolder">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">frontend</span>
+                        <span class="folder-desc">HTML, CSS, JavaScript (React/Vue), TypeScript, JSX, TSX</span>
+                    </div>
+                    <div class="folder-item subfolder">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">database</span>
+                        <span class="folder-desc">SQL, SQLite, JSON configs, CSV data</span>
+                    </div>
+                    <div class="folder-item subfolder">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">images</span>
+                        <span class="folder-desc">PNG, JPG, GIF, SVG, WebP</span>
+                    </div>
+                    <div class="folder-item subfolder">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">documents</span>
+                        <span class="folder-desc">PDF, Word, Text, Office files</span>
+                    </div>
+                    <div class="folder-item subfolder">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">others</span>
+                        <span class="folder-desc">Unrecognized file types</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-list">
+                <h3>Project Features</h3>
+                <ul>
+                    <li>✓ Automatic file categorization by type</li>
+                    <li>✓ Smart duplicate detection and removal (SHA256 hashing)</li>
+                    <li>✓ Real-time monitoring of project folder</li>
+                    <li>✓ Detailed file organization logs and statistics</li>
+                    <li>✓ Support for all major development languages and frameworks</li>
+                    <li>✓ Organized project structure for professional workflows</li>
+                </ul>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Create Project</button>
+                <a href="{{ url_for('projects') }}" class="btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .create-project-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 20px;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+    }
+
+    .form-header {
+        margin-bottom: 2rem;
+        text-align: center;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .form-header h2 {
+        margin: 0 0 0.5rem 0;
+        color: #1a1a1a;
+        font-size: 24px;
+    }
+
+    .form-header p {
+        margin: 0;
+        color: #666;
+        font-size: 16px;
+    }
+
+    .project-form {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .form-group {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #1a1a1a;
+        font-size: 14px;
+    }
+
+    .form-group input {
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+    .form-group small {
+        color: #999;
+        font-size: 13px;
+    }
+
+    .project-structure-preview {
+        background: #f9f9f9;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        padding: 1.5rem;
+    }
+
+    .project-structure-preview h3 {
+        margin: 0 0 1rem 0;
+        font-size: 16px;
+        color: #1a1a1a;
+    }
+
+    .folder-tree {
+        font-family: monospace;
+        font-size: 13px;
+    }
+
+    .folder-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        color: #1a1a1a;
+    }
+
+    .folder-item.subfolder {
+        margin-left: 2rem;
+        display: grid;
+        grid-template-columns: 20px 150px 1fr;
+        gap: 0.5rem;
+    }
+
+    .folder-icon {
+        flex-shrink: 0;
+    }
+
+    .folder-name {
+        font-weight: 600;
+        color: #4CAF50;
+    }
+
+    .folder-item.subfolder .folder-name {
+        color: #4CAF50;
+    }
+
+    .folder-desc {
+        color: #999;
+        font-size: 12px;
+        grid-column: 2 / 4;
+        margin-top: -0.5rem;
+        margin-left: 0;
+    }
+
+    .features-list {
+        background: #e8f5e9;
+        border-left: 4px solid #4CAF50;
+        border-radius: 4px;
+        padding: 1.5rem;
+    }
+
+    .features-list h3 {
+        margin: 0 0 1rem 0;
+        color: #1b5e20;
+        font-size: 16px;
+    }
+
+    .features-list ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .features-list li {
+        color: #1b5e20;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding-top: 1rem;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #45a049;
+    }
+
+    .btn-secondary {
+        background: #f0f0f0;
+        color: #1a1a1a;
+    }
+
+    .btn-secondary:hover {
+        background: #e0e0e0;
+    }
+
+    @media (max-width: 600px) {
+        .form-card {
+            padding: 1.5rem;
+        }
+
+        .folder-item.subfolder {
+            grid-template-columns: 20px 1fr;
+            gap: 0.5rem;
+        }
+
+        .folder-desc {
+            grid-column: 1 / 3;
+            margin-left: 20px;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

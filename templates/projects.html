@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="projects-container">
+    <div class="projects-header">
+        <h2>Development Projects</h2>
+        <p>Organize your software development project files automatically</p>
+        <a href="{{ url_for('create_project') }}" class="action-button">+ New Project</a>
+    </div>
+
+    {% if projects %}
+    <div class="projects-grid">
+        {% for project in projects %}
+        <div class="project-card">
+            <div class="project-card-header">
+                <h3>{{ project.project_name }}</h3>
+                <span class="project-status {% if project.is_monitoring %}monitoring{% endif %}">
+                    {% if project.is_monitoring %}
+                        <span class="status-indicator">●</span> Monitoring
+                    {% else %}
+                        Not Monitoring
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="project-info">
+                <p class="project-path">
+                    <strong>Location:</strong><br>
+                    {{ project.project_path }}
+                </p>
+                <div class="project-stats">
+                    <div class="stat">
+                        <span class="stat-label">Total Files</span>
+                        <span class="stat-value">{{ project.stats.total_files }}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Storage</span>
+                        <span class="stat-value">{{ "%.1f" | format(project.stats.total_size_bytes / 1024 / 1024) }} MB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="file-types-summary">
+                <h4>File Organization</h4>
+                <div class="type-badges">
+                    {% if project.stats.backend > 0 %}
+                    <span class="badge backend-badge">Backend: {{ project.stats.backend }}</span>
+                    {% endif %}
+                    {% if project.stats.frontend > 0 %}
+                    <span class="badge frontend-badge">Frontend: {{ project.stats.frontend }}</span>
+                    {% endif %}
+                    {% if project.stats.database > 0 %}
+                    <span class="badge database-badge">Database: {{ project.stats.database }}</span>
+                    {% endif %}
+                    {% if project.stats.images > 0 %}
+                    <span class="badge images-badge">Images: {{ project.stats.images }}</span>
+                    {% endif %}
+                    {% if project.stats.documents > 0 %}
+                    <span class="badge documents-badge">Docs: {{ project.stats.documents }}</span>
+                    {% endif %}
+                    {% if project.stats.others > 0 %}
+                    <span class="badge others-badge">Others: {{ project.stats.others }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="project-actions">
+                <a href="{{ url_for('view_project', project_id=project.id) }}" class="action-button small">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>No projects yet</h3>
+        <p>Create your first development project to get started with smart file organization</p>
+        <a href="{{ url_for('create_project') }}" class="action-button">Create First Project</a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .projects-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 20px;
+    }
+
+    .projects-header {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .projects-header h2 {
+        margin: 0;
+        color: #1a1a1a;
+        font-size: 28px;
+    }
+
+    .projects-header p {
+        color: #666;
+        margin: 0;
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .project-card {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: #4CAF50;
+    }
+
+    .project-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .project-card-header h3 {
+        margin: 0;
+        color: #1a1a1a;
+        font-size: 18px;
+    }
+
+    .project-status {
+        font-size: 12px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        background: #f0f0f0;
+        color: #666;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .project-status.monitoring {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .status-indicator {
+        font-size: 10px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .project-info {
+        margin-bottom: 1.5rem;
+    }
+
+    .project-path {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 1rem;
+        word-break: break-all;
+        background: #f9f9f9;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    .project-stats {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .stat {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        background: #f5f5f5;
+        border-radius: 6px;
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+    .file-types-summary {
+        margin-bottom: 1.5rem;
+    }
+
+    .file-types-summary h4 {
+        margin: 0 0 0.75rem 0;
+        font-size: 13px;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .type-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .badge {
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-weight: 500;
+        background: #f0f0f0;
+        color: #333;
+    }
+
+    .badge.backend-badge {
+        background: #e3f2fd;
+        color: #1565c0;
+    }
+
+    .badge.frontend-badge {
+        background: #fce4ec;
+        color: #c2185b;
+    }
+
+    .badge.database-badge {
+        background: #f3e5f5;
+        color: #6a1b9a;
+    }
+
+    .badge.images-badge {
+        background: #fff3e0;
+        color: #e65100;
+    }
+
+    .badge.documents-badge {
+        background: #e0f2f1;
+        color: #00695c;
+    }
+
+    .badge.others-badge {
+        background: #f1f8e9;
+        color: #558b2f;
+    }
+
+    .project-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .action-button {
+        padding: 8px 16px;
+        background: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
+        flex: 1;
+        text-align: center;
+    }
+
+    .action-button:hover {
+        background: #45a049;
+    }
+
+    .action-button.small {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        background: white;
+        border-radius: 8px;
+        border: 2px dashed #ddd;
+    }
+
+    .empty-state h3 {
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+</style>
+{% endblock %}

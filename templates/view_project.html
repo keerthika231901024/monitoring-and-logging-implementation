@@ -1,0 +1,643 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="view-project-container">
+    <div class="project-header">
+        <div class="header-info">
+            <h2>{{ project.project_name }}</h2>
+            <p class="project-path">{{ project.project_path }}</p>
+        </div>
+        <div class="header-controls">
+            <form method="POST" action="{{ url_for('project_monitor', project_id=project.id) }}" style="display: inline;">
+                {% if project.is_monitoring %}
+                <button type="submit" name="monitor" value="false" class="btn-monitoring active">
+                    <span class="status-indicator">●</span> Monitoring Active
+                </button>
+                {% else %}
+                <button type="submit" name="monitor" value="true" class="btn-monitoring">
+                    <span class="status-indicator">○</span> Start Monitoring
+                </button>
+                {% endif %}
+            </form>
+            <a href="{{ url_for('projects') }}" class="btn-back">← Back to Projects</a>
+        </div>
+    </div>
+
+    <div class="project-content">
+        <!-- File Upload Section -->
+        <div class="upload-section">
+            <h3>Upload Files to Project</h3>
+            <div class="upload-area" id="uploadArea">
+                <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                    hidden
+                />
+                <p>Drag files here or click to select</p>
+                <small>Files will be automatically organized by type</small>
+            </div>
+            <div id="uploadProgress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress" id="progressFill"></div>
+                </div>
+                <p id="uploadStatus"></p>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="statistics-section">
+            <h3>Project Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Total Files</span>
+                    <span class="stat-value">{{ stats.total_files }}</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total Storage</span>
+                    <span class="stat-value">{{ "%.2f" | format(stats.total_size_bytes / 1024 / 1024) }} MB</span>
+                </div>
+                <div class="stat-card backend">
+                    <span class="stat-label">Backend Files</span>
+                    <span class="stat-value">{{ stats.backend }}</span>
+                </div>
+                <div class="stat-card frontend">
+                    <span class="stat-label">Frontend Files</span>
+                    <span class="stat-value">{{ stats.frontend }}</span>
+                </div>
+                <div class="stat-card database">
+                    <span class="stat-label">Database Files</span>
+                    <span class="stat-value">{{ stats.database }}</span>
+                </div>
+                <div class="stat-card images">
+                    <span class="stat-label">Images</span>
+                    <span class="stat-value">{{ stats.images }}</span>
+                </div>
+                <div class="stat-card documents">
+                    <span class="stat-label">Documents</span>
+                    <span class="stat-value">{{ stats.documents }}</span>
+                </div>
+                <div class="stat-card others">
+                    <span class="stat-label">Others</span>
+                    <span class="stat-value">{{ stats.others }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Organization Section -->
+        <div class="file-organization-section">
+            <h3>Organized Files by Category</h3>
+            
+            {% if files.backend or files.frontend or files.database or files.images or files.documents or files.others %}
+            <div class="file-categories">
+                {% if files.backend %}
+                <div class="file-category">
+                    <h4 class="category-title backend-title">
+                        <span class="category-icon">⚙️</span> Backend
+                    </h4>
+                    <div class="file-list">
+                        {% for filename in files.backend %}
+                        <div class="file-item">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">{{ filename }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if files.frontend %}
+                <div class="file-category">
+                    <h4 class="category-title frontend-title">
+                        <span class="category-icon">🎨</span> Frontend
+                    </h4>
+                    <div class="file-list">
+                        {% for filename in files.frontend %}
+                        <div class="file-item">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">{{ filename }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if files.database %}
+                <div class="file-category">
+                    <h4 class="category-title database-title">
+                        <span class="category-icon">🗄️</span> Database
+                    </h4>
+                    <div class="file-list">
+                        {% for filename in files.database %}
+                        <div class="file-item">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">{{ filename }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if files.images %}
+                <div class="file-category">
+                    <h4 class="category-title images-title">
+                        <span class="category-icon">🖼️</span> Images
+                    </h4>
+                    <div class="file-list">
+                        {% for filename in files.images %}
+                        <div class="file-item">
+                            <span class="file-icon">🖼️</span>
+                            <span class="file-name">{{ filename }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if files.documents %}
+                <div class="file-category">
+                    <h4 class="category-title documents-title">
+                        <span class="category-icon">📋</span> Documents
+                    </h4>
+                    <div class="file-list">
+                        {% for filename in files.documents %}
+                        <div class="file-item">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">{{ filename }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if files.others %}
+                <div class="file-category">
+                    <h4 class="category-title others-title">
+                        <span class="category-icon">📦</span> Others
+                    </h4>
+                    <div class="file-list">
+                        {% for filename in files.others %}
+                        <div class="file-item">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">{{ filename }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="empty-message">
+                <p>No files organized yet. Upload files to get started.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Recent Activity Section -->
+        {% if project_files %}
+        <div class="recent-activity-section">
+            <h3>Recent File Movements</h3>
+            <div class="activity-list">
+                {% for file in project_files[:10] %}
+                <div class="activity-item">
+                    <div class="activity-time">
+                        {{ file.moved_at }}
+                    </div>
+                    <div class="activity-details">
+                        <span class="activity-filename">{{ file.filename }}</span>
+                        <span class="activity-type">→ {{ file.file_type }}</span>
+                        {% if file.duplicates_removed > 0 %}
+                        <span class="activity-duplicates">
+                            Removed {{ file.duplicates_removed }} duplicate(s)
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="activity-size">
+                        {{ "%.1f" | format(file.file_size / 1024) }} KB
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+const uploadProgress = document.getElementById('uploadProgress');
+const progressFill = document.getElementById('progressFill');
+const uploadStatus = document.getElementById('uploadStatus');
+
+uploadArea.addEventListener('click', () => fileInput.click());
+
+uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.style.backgroundColor = '#e8f5e9';
+});
+
+uploadArea.addEventListener('dragleave', () => {
+    uploadArea.style.backgroundColor = '';
+});
+
+uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.style.backgroundColor = '';
+    const files = e.dataTransfer.files;
+    uploadFiles(files);
+});
+
+fileInput.addEventListener('change', (e) => {
+    uploadFiles(e.target.files);
+});
+
+function uploadFiles(files) {
+    let uploadedCount = 0;
+    let totalCount = files.length;
+    
+    uploadProgress.style.display = 'block';
+    
+    Array.from(files).forEach((file, index) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        fetch('/project/{{ project.id }}/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            uploadedCount++;
+            
+            if (data.success) {
+                uploadStatus.innerHTML = `
+                    ✓ Uploaded: ${data.filename}<br>
+                    Category: ${data.file_type}<br>
+                    Duplicates removed: ${data.duplicates_removed}
+                `;
+                
+                if (uploadedCount === totalCount) {
+                    uploadStatus.innerHTML += '<br><strong>All files uploaded successfully!</strong>';
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
+            } else {
+                uploadStatus.innerHTML = `✗ Error uploading ${file.name}: ${data.error}`;
+            }
+            
+            progressFill.style.width = (uploadedCount / totalCount * 100) + '%';
+        })
+        .catch(error => {
+            uploadStatus.innerHTML = `Error: ${error.message}`;
+            uploadedCount++;
+        });
+    });
+}
+</script>
+
+<style>
+    .view-project-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 20px;
+    }
+
+    .project-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        align-items: start;
+    }
+
+    .header-info h2 {
+        margin: 0 0 0.5rem 0;
+        color: #1a1a1a;
+        font-size: 28px;
+    }
+
+    .project-path {
+        color: #666;
+        font-size: 13px;
+        margin: 0;
+        word-break: break-all;
+    }
+
+    .header-controls {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-monitoring,
+    .btn-back {
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        border: 1px solid #ddd;
+        background: white;
+        color: #1a1a1a;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btn-monitoring.active {
+        background: #e8f5e9;
+        border-color: #4CAF50;
+        color: #2e7d32;
+    }
+
+    .btn-back:hover {
+        background: #f0f0f0;
+    }
+
+    .project-content {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .upload-section,
+    .statistics-section,
+    .file-organization-section,
+    .recent-activity-section {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .upload-section h3,
+    .statistics-section h3,
+    .file-organization-section h3,
+    .recent-activity-section h3 {
+        margin: 0 0 1.5rem 0;
+        color: #1a1a1a;
+        font-size: 18px;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .upload-area {
+        border: 2px dashed #ddd;
+        border-radius: 6px;
+        padding: 3rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .upload-area:hover {
+        border-color: #4CAF50;
+        background: #f9f9f9;
+    }
+
+    .upload-area p {
+        margin: 0 0 0.5rem 0;
+        color: #1a1a1a;
+        font-weight: 500;
+    }
+
+    .upload-area small {
+        color: #999;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 24px;
+        background: #f0f0f0;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .progress {
+        height: 100%;
+        background: linear-gradient(90deg, #4CAF50, #45a049);
+        width: 0%;
+        transition: width 0.3s ease;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .stat-card {
+        background: #f9f9f9;
+        border-radius: 6px;
+        padding: 1rem;
+        text-align: center;
+        border-left: 4px solid #ddd;
+    }
+
+    .stat-card.backend {
+        border-left-color: #1565c0;
+        background: #e3f2fd;
+    }
+
+    .stat-card.frontend {
+        border-left-color: #c2185b;
+        background: #fce4ec;
+    }
+
+    .stat-card.database {
+        border-left-color: #6a1b9a;
+        background: #f3e5f5;
+    }
+
+    .stat-card.images {
+        border-left-color: #e65100;
+        background: #fff3e0;
+    }
+
+    .stat-card.documents {
+        border-left-color: #00695c;
+        background: #e0f2f1;
+    }
+
+    .stat-card.others {
+        border-left-color: #558b2f;
+        background: #f1f8e9;
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .stat-value {
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+        color: #1a1a1a;
+    }
+
+    .file-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .file-category {
+        background: #f9f9f9;
+        border-radius: 6px;
+        padding: 1rem;
+        border-left: 4px solid #ddd;
+    }
+
+    .category-title {
+        margin: 0 0 1rem 0;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #1a1a1a;
+    }
+
+    .file-category.backend {
+        border-left-color: #1565c0;
+    }
+
+    .file-category.frontend {
+        border-left-color: #c2185b;
+    }
+
+    .file-category.database {
+        border-left-color: #6a1b9a;
+    }
+
+    .file-category.images {
+        border-left-color: #e65100;
+    }
+
+    .file-category.documents {
+        border-left-color: #00695c;
+    }
+
+    .file-category.others {
+        border-left-color: #558b2f;
+    }
+
+    .file-list {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .file-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 6px;
+        background: white;
+        border-radius: 4px;
+        font-size: 13px;
+        overflow: hidden;
+    }
+
+    .file-icon {
+        flex-shrink: 0;
+    }
+
+    .file-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #1a1a1a;
+    }
+
+    .empty-message {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+    }
+
+    .activity-list {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .activity-item {
+        display: grid;
+        grid-template-columns: 140px 1fr 100px;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f9f9f9;
+        border-radius: 4px;
+        align-items: center;
+    }
+
+    .activity-time {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .activity-details {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .activity-filename {
+        color: #1a1a1a;
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .activity-type {
+        background: #e3f2fd;
+        color: #1565c0;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .activity-duplicates {
+        background: #fff3cd;
+        color: #856404;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    .activity-size {
+        text-align: right;
+        font-size: 12px;
+        color: #666;
+    }
+
+    @media (max-width: 768px) {
+        .project-header {
+            grid-template-columns: 1fr;
+        }
+
+        .activity-item {
+            grid-template-columns: 1fr;
+        }
+
+        .activity-details {
+            grid-template-columns: 1fr;
+        }
+
+        .file-categories {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}

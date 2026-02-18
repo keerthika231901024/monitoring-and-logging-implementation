@@ -1,0 +1,109 @@
+2026-02-18T04:34:08.106710 | ZvWteqyLG7m4 | register | - | success | User keerthi registered
+2026-02-18T04:34:20.951511 | ZvWteqyLG7m4 | login | - | success | User keerthi logged in
+2026-02-18T04:35:51.909751 | ZvWteqyLG7m4 | file_moved | sample1.txt | success | Moved to Documents
+2026-02-18T04:35:51.928819 | ZvWteqyLG7m4 | system_run | - | success | Run completed. Files: 1, Errors: 0
+2026-02-18T04:36:22.102829 | ZvWteqyLG7m4 | logout | - | success | User keerthi logged out
+2026-02-18T04:36:37.270917 | wvdJMbCVqLcH | register | - | success | User jai registered
+2026-02-18T04:36:48.612842 | wvdJMbCVqLcH | login | - | success | User jai logged in
+2026-02-18T04:43:44.806937 | wvdJMbCVqLcH | jai | logout | - | success | User jai logged out
+2026-02-18T04:43:48.297817 | 0Qgmf9NKO20Q | keerthi | login | - | success | User keerthi logged in
+2026-02-18T04:43:55.961924 | 0Qgmf9NKO20Q | keerthi | logout | - | success | User keerthi logged out
+2026-02-18T04:44:09.149865 | JK9UH4Mnjw52 | jai | login | - | success | User jai logged in
+2026-02-18T04:44:26.335212 | JK9UH4Mnjw52 | jai | file_moved | sample1.txt | success | Moved to Documents
+2026-02-18T04:44:26.357169 | JK9UH4Mnjw52 | jai | system_run | - | success | Run completed. Files: 1, Errors: 0
+2026-02-18T04:50:15.475734 | JK9UH4Mnjw52 | jai | upload | sample1.txt | success | File uploaded successfully
+2026-02-18T04:50:42.702135 | JK9UH4Mnjw52 | jai | logout | - | success | User jai logged out
+2026-02-18T04:50:44.812755 | q5kwFefrrJob | keerthi | login | - | success | User keerthi logged in
+2026-02-18T04:50:53.317852 | q5kwFefrrJob | keerthi | logout | - | success | User keerthi logged out
+2026-02-18T04:51:03.479666 | iyFEoVHdnyen | jai | login | - | success | User jai logged in
+2026-02-18T05:11:05.392147 | iyFEoVHdnyen | jai | logout | - | success | User jai logged out
+2026-02-18T05:12:56.288400 | 8XUhzjsWlzcF | keerthi | login | - | success | User keerthi logged in
+2026-02-18T05:15:08.383022 | 8XUhzjsWlzcF | keerthi | monitoring_started | C:\Users\idpuser\Desktop\Banking System | success | Started monitoring folder: C:\Users\idpuser\Desktop\Banking System
+2026-02-18T05:15:47.920529 | 8XUhzjsWlzcF | keerthi | upload | sample1.txt | success | File uploaded successfully
+2026-02-18T05:16:13.916784 | 8XUhzjsWlzcF | keerthi | file_deleted | C:\Users\idpuser\Desktop\Banking System\New folder | success | File deleted: C:\Users\idpuser\Desktop\Banking System\New folder
+2026-02-18T05:16:18.760621 | 8XUhzjsWlzcF | keerthi | monitoring_stopped | - | success | Stopped monitoring
+2026-02-18T05:23:07.234397 | 8XUhzjsWlzcF | keerthi | monitoring_started | C:\Users\idpuser\Desktop\Banking System | success | Started monitoring folder: C:\Users\idpuser\Desktop\Banking System
+2026-02-18T05:23:44.219216 | 8XUhzjsWlzcF | keerthi | monitoring_started | C:\Users\idpuser\Desktop\Banking System | success | Started monitoring folder: C:\Users\idpuser\Desktop\Banking System
+2026-02-18T05:23:50.353742 | 8XUhzjsWlzcF | keerthi | file_deleted | C:\Users\idpuser\Desktop\Banking System\gp | success | File deleted: C:\Users\idpuser\Desktop\Banking System\gp
+2026-02-18T05:23:55.608037 | 8XUhzjsWlzcF | keerthi | monitoring_stopped | - | success | Stopped monitoring
+2026-02-18T05:25:24.044818 | 8XUhzjsWlzcF | keerthi | delete | sample1.txt | success | File deleted successfully
+2026-02-18T05:25:41.482128 | 8XUhzjsWlzcF | keerthi | upload | sample1.txt | success | File uploaded successfully
+2026-02-18T05:30:04.059269 | 8XUhzjsWlzcF | keerthi | monitoring_started | C:\Users\idpuser\Desktop\Banking System | success | Started monitoring folder: C:\Users\idpuser\Desktop\Banking System
+2026-02-18T05:30:23.964990 | 8XUhzjsWlzcF | keerthi | file_renamed | C:\Users\idpuser\Desktop\Banking System\services\AuthService.class | success | File renamed/moved from C:\Users\idpuser\Desktop\Banking System\service\AuthService.class to C:\Users\idpuser\Desktop\Banking System\services\AuthService.class
+2026-02-18T05:30:23.981103 | 8XUhzjsWlzcF | keerthi | file_renamed | C:\Users\idpuser\Desktop\Banking System\services\AuthService.java | success | File renamed/moved from C:\Users\idpuser\Desktop\Banking System\service\AuthService.java to C:\Users\idpuser\Desktop\Banking System\services\AuthService.java
+2026-02-18T05:30:23.998273 | 8XUhzjsWlzcF | keerthi | file_renamed | C:\Users\idpuser\Desktop\Banking System\services\BankingService.class | success | File renamed/moved from C:\Users\idpuser\Desktop\Banking System\service\BankingService.class to C:\Users\idpuser\Desktop\Banking System\services\BankingService.class
+2026-02-18T05:30:24.011011 | 8XUhzjsWlzcF | keerthi | file_renamed | C:\Users\idpuser\Desktop\Banking System\services\BankingService.java | success | File renamed/moved from C:\Users\idpuser\Desktop\Banking System\service\BankingService.java to C:\Users\idpuser\Desktop\Banking System\services\BankingService.java
+2026-02-18T05:30:27.424893 | 8XUhzjsWlzcF | keerthi | monitoring_stopped | - | success | Stopped monitoring
+2026-02-18T05:34:40.733790 | 8XUhzjsWlzcF | keerthi | view | sample1.txt | success | File viewed: sample1.txt
+2026-02-18T05:36:52.511109 | 8XUhzjsWlzcF | keerthi | download | sample1.txt | success | File downloaded: sample1.txt
+2026-02-18T05:37:20.140770 | 8XUhzjsWlzcF | keerthi | delete | sample1.txt | success | File deleted successfully
+2026-02-18T05:38:39.401681 | 8XUhzjsWlzcF | keerthi | monitoring_started | C:\Users\idpuser\Desktop\Banking System | success | Started monitoring folder: C:\Users\idpuser\Desktop\Banking System
+2026-02-18T05:38:46.171821 | 8XUhzjsWlzcF | keerthi | folder_created | C:\Users\idpuser\Desktop\Banking System\New folder | success | Folder created: C:\Users\idpuser\Desktop\Banking System\New folder
+2026-02-18T05:38:49.376960 | 8XUhzjsWlzcF | keerthi | folder_renamed | C:\Users\idpuser\Desktop\Banking System\dp | success | Folder renamed/moved from C:\Users\idpuser\Desktop\Banking System\New folder to C:\Users\idpuser\Desktop\Banking System\dp
+2026-02-18T05:38:53.127413 | 8XUhzjsWlzcF | keerthi | monitoring_stopped | - | success | Stopped monitoring
+2026-02-18T05:39:22.918900 | 8XUhzjsWlzcF | keerthi | monitoring_started | C:\Users\idpuser\Desktop\Banking System | success | Started monitoring folder: C:\Users\idpuser\Desktop\Banking System
+2026-02-18T05:39:29.105995 | 8XUhzjsWlzcF | keerthi | folder_created | C:\Users\idpuser\Desktop\Banking System\New folder | success | Folder created: C:\Users\idpuser\Desktop\Banking System\New folder
+2026-02-18T05:39:35.121353 | 8XUhzjsWlzcF | keerthi | folder_renamed | C:\Users\idpuser\Desktop\Banking System\y | success | Folder renamed/moved from C:\Users\idpuser\Desktop\Banking System\New folder to C:\Users\idpuser\Desktop\Banking System\y
+2026-02-18T05:39:38.809792 | 8XUhzjsWlzcF | keerthi | file_deleted | C:\Users\idpuser\Desktop\Banking System\dp | success | File deleted: C:\Users\idpuser\Desktop\Banking System\dp
+2026-02-18T05:39:41.859263 | 8XUhzjsWlzcF | keerthi | file_deleted | C:\Users\idpuser\Desktop\Banking System\y | success | File deleted: C:\Users\idpuser\Desktop\Banking System\y
+2026-02-18T05:39:45.694473 | 8XUhzjsWlzcF | keerthi | monitoring_stopped | - | success | Stopped monitoring
+2026-02-18T05:50:17.122004 | 8XUhzjsWlzcF | keerthi | uploaded_and_organized | sample1.txt | success | sample1.txt moved to Documents folder
+2026-02-18T05:51:25.686760 | 8XUhzjsWlzcF | keerthi | uploaded_and_organized | butterfly.jpg | success | butterfly.jpg moved to Pictures folder
+2026-02-18T06:05:02.004527 | U6BXvNb662Ge | keerthi | login | - | success | User keerthi logged in
+2026-02-18T06:05:30.684912 | U6BXvNb662Ge | keerthi | upload_pending | butterfly.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T06:05:46.176049 | U6BXvNb662Ge | keerthi | uploaded_and_organized | butterfly.jpg | success | butterfly.jpg moved to Pictures folder after confirmation
+2026-02-18T06:07:57.178658 | U6BXvNb662Ge | keerthi | logout | - | success | User keerthi logged out
+2026-02-18T06:08:17.504465 | FKgGliqYqNV2 | keerthi | login | - | success | User keerthi logged in
+2026-02-18T06:11:14.481446 | FKgGliqYqNV2 | keerthi | upload_pending | butterfly.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T06:11:18.759403 | FKgGliqYqNV2 | keerthi | upload_kept | butterfly.jpg | success | butterfly.jpg kept in uploads folder (not organized)
+2026-02-18T06:18:44.936894 | FKgGliqYqNV2 | keerthi | upload_pending | butterfly.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T06:18:49.578932 | FKgGliqYqNV2 | keerthi | file_categorized | butterfly.jpg | success | File categorized as Pictures
+2026-02-18T06:18:49.598694 | FKgGliqYqNV2 | keerthi | duplicate_found | butterfly.jpg | success | Found 2 duplicate(s) in C:/Users/idpuser/Pictures
+2026-02-18T06:18:49.614009 | FKgGliqYqNV2 | keerthi | duplicate_deleted | butterfly.jpg | success | Duplicate removed from C:/Users/idpuser/Pictures\butterfly.jpg (Size: 6358 bytes)
+2026-02-18T06:18:49.628301 | FKgGliqYqNV2 | keerthi | duplicate_deleted | butterfly_1.jpg | success | Duplicate removed from C:/Users/idpuser/Pictures\butterfly_1.jpg (Size: 6358 bytes)
+2026-02-18T06:18:49.641229 | FKgGliqYqNV2 | keerthi | cleanup_completed | butterfly.jpg | success | Removed 2 duplicate(s)
+2026-02-18T06:18:49.656725 | FKgGliqYqNV2 | keerthi | uploaded_and_organized | butterfly.jpg | success | butterfly.jpg moved to Pictures folder
+2026-02-18T06:18:49.670226 | FKgGliqYqNV2 | keerthi | file_moved_detailed | butterfly.jpg | success | Moved from C:\Users\idpuser\Desktop\AI\uploads\temp\butterfly.jpg to C:/Users/idpuser/Pictures\butterfly.jpg
+2026-02-18T06:23:37.961323 | FKgGliqYqNV2 | keerthi | upload_pending | b.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T06:23:44.686491 | FKgGliqYqNV2 | keerthi | file_categorized | b.jpg | success | File categorized as Pictures
+2026-02-18T06:23:44.705785 | FKgGliqYqNV2 | keerthi | uploaded_and_organized | b.jpg | success | b.jpg moved to Pictures folder
+2026-02-18T06:23:44.718306 | FKgGliqYqNV2 | keerthi | file_moved_detailed | b.jpg | success | Moved from C:\Users\idpuser\Desktop\AI\uploads\temp\b.jpg to C:/Users/idpuser/Pictures\b.jpg
+2026-02-18T06:37:42.863106 | 8XUhzjsWlzcF | keerthi | upload_pending | b.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T06:37:47.711574 | 8XUhzjsWlzcF | keerthi | upload_kept | b.jpg | success | b.jpg kept in uploads folder (not organized)
+2026-02-18T06:45:48.325635 | 8XUhzjsWlzcF | keerthi | file_moved | b.jpg | success | Moved to Images
+2026-02-18T06:45:48.373140 | 8XUhzjsWlzcF | keerthi | system_run | - | success | Run completed. Files: 1, Errors: 0
+2026-02-18T06:50:47.744287 | 8XUhzjsWlzcF | keerthi | upload_pending | b.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T06:50:54.917583 | 8XUhzjsWlzcF | keerthi | file_categorized | b.jpg | success | File categorized as Pictures
+2026-02-18T06:50:54.952394 | 8XUhzjsWlzcF | keerthi | duplicate_found | b.jpg | success | Found 1 duplicate(s) in C:/Users/idpuser/Pictures
+2026-02-18T06:50:54.965678 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | b.jpg | success | Duplicate removed from C:/Users/idpuser/Pictures\b.jpg (Size: 8046 bytes)
+2026-02-18T06:50:54.977871 | 8XUhzjsWlzcF | keerthi | cleanup_completed | b.jpg | success | Removed 1 duplicate(s)
+2026-02-18T06:50:54.991245 | 8XUhzjsWlzcF | keerthi | file_moved_successfully | b.jpg | success | File moved to C:/Users/idpuser/Pictures\b.jpg
+2026-02-18T06:50:55.006544 | 8XUhzjsWlzcF | keerthi | uploaded_and_organized | b.jpg | success | b.jpg moved to Pictures folder
+2026-02-18T06:50:55.021484 | 8XUhzjsWlzcF | keerthi | organization_summary | b.jpg | success | b.jpg → C:/Users/idpuser/Pictures\b.jpg | Duplicates: 1 removed | Original cleanup: completed
+2026-02-18T06:50:55.035550 | 8XUhzjsWlzcF | keerthi | file_organization_confirmed | b.jpg | success | File successfully organized with cleanup: ✓ b.jpg moved to Pictures folder • 1 duplicate(s) removed
+2026-02-18T06:59:54.828941 | 8XUhzjsWlzcF | keerthi | upload_pending | b.jpg | success | File uploaded. Waiting for user confirmation to organize to Pictures
+2026-02-18T07:00:00.544200 | 8XUhzjsWlzcF | keerthi | file_categorized | b.jpg | success | File categorized as Pictures
+2026-02-18T07:00:00.580462 | 8XUhzjsWlzcF | keerthi | duplicate_found | b.jpg | success | Found 1 duplicate(s) in C:/Users/idpuser/Pictures
+2026-02-18T07:00:00.597803 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | b.jpg | success | Duplicate removed from C:/Users/idpuser/Pictures\b.jpg (Size: 8046 bytes)
+2026-02-18T07:00:00.611066 | 8XUhzjsWlzcF | keerthi | cleanup_completed | b.jpg | success | Removed 1 duplicate(s)
+2026-02-18T07:00:00.632362 | 8XUhzjsWlzcF | keerthi | file_moved_successfully | b.jpg | success | File moved to C:/Users/idpuser/Pictures\b.jpg
+2026-02-18T07:00:04.550794 | 8XUhzjsWlzcF | keerthi | system_wide_duplicates_found | b.jpg | success | Found 2 duplicate(s) across system folders: Downloads, Uploads
+2026-02-18T07:00:04.570824 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | b.jpg | success | Duplicate removed from C:/Users/idpuser/Downloads\b.jpg (Size: 8046 bytes)
+2026-02-18T07:00:04.582934 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | b.jpg | success | Duplicate removed from C:/Users/idpuser/Desktop/AI/uploads\b.jpg (Size: 8046 bytes)
+2026-02-18T07:00:04.599453 | 8XUhzjsWlzcF | keerthi | system_wide_cleanup_completed | b.jpg | success | Removed 2 duplicate(s) from system folders: Downloads, Uploads
+2026-02-18T07:00:04.614560 | 8XUhzjsWlzcF | keerthi | uploaded_and_organized | b.jpg | success | b.jpg moved to Pictures folder • 2 old copies removed from Downloads and Uploads
+2026-02-18T07:00:04.629692 | 8XUhzjsWlzcF | keerthi | organization_summary | b.jpg | success | b.jpg → C:/Users/idpuser/Pictures\b.jpg | Destination duplicates: 1 removed | System-wide duplicates: 2 removed | Total cleaned: 3
+2026-02-18T07:00:04.644169 | 8XUhzjsWlzcF | keerthi | file_organization_confirmed | b.jpg | success | File successfully organized: ✓ b.jpg moved to Pictures folder • 2 old copies removed from Downloads and Uploads | System-wide duplicates: 2 | Total removed: 3
+2026-02-18T07:01:28.561333 | 8XUhzjsWlzcF | keerthi | upload_pending | sample1.txt | success | File uploaded. Waiting for user confirmation to organize to Documents
+2026-02-18T07:01:32.639832 | 8XUhzjsWlzcF | keerthi | file_categorized | sample1.txt | success | File categorized as Documents
+2026-02-18T07:01:32.660150 | 8XUhzjsWlzcF | keerthi | duplicate_found | sample1.txt | success | Found 1 duplicate(s) in C:/Users/idpuser/Documents
+2026-02-18T07:01:32.676516 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | sample1.txt | success | Duplicate removed from C:/Users/idpuser/Documents\sample1.txt (Size: 12 bytes)
+2026-02-18T07:01:32.689514 | 8XUhzjsWlzcF | keerthi | cleanup_completed | sample1.txt | success | Removed 1 duplicate(s)
+2026-02-18T07:01:32.705571 | 8XUhzjsWlzcF | keerthi | file_moved_successfully | sample1.txt | success | File moved to C:/Users/idpuser/Documents\sample1.txt
+2026-02-18T07:01:37.232637 | 8XUhzjsWlzcF | keerthi | system_wide_duplicates_found | sample1.txt | success | Found 2 duplicate(s) across system folders: Downloads, Uploads
+2026-02-18T07:01:37.268336 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | sample1.txt | success | Duplicate removed from C:/Users/idpuser/Downloads\sample1.txt (Size: 12 bytes)
+2026-02-18T07:01:37.286259 | 8XUhzjsWlzcF | keerthi | duplicate_deleted | sample1_1.txt | success | Duplicate removed from C:/Users/idpuser/Desktop/AI/uploads\sample1_1.txt (Size: 12 bytes)
+2026-02-18T07:01:37.301523 | 8XUhzjsWlzcF | keerthi | system_wide_cleanup_completed | sample1.txt | success | Removed 2 duplicate(s) from system folders: Downloads, Uploads
+2026-02-18T07:01:37.316599 | 8XUhzjsWlzcF | keerthi | uploaded_and_organized | sample1.txt | success | sample1.txt moved to Documents folder • 2 old copies removed from Downloads and Uploads
+2026-02-18T07:01:37.330089 | 8XUhzjsWlzcF | keerthi | organization_summary | sample1.txt | success | sample1.txt → C:/Users/idpuser/Documents\sample1.txt | Destination duplicates: 1 removed | System-wide duplicates: 2 removed | Total cleaned: 3
+2026-02-18T07:01:37.344753 | 8XUhzjsWlzcF | keerthi | file_organization_confirmed | sample1.txt | success | File successfully organized: ✓ sample1.txt moved to Documents folder • 2 old copies removed from Downloads and Uploads | System-wide duplicates: 2 | Total removed: 3

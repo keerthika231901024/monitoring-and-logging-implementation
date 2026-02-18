@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-wrapper">
+    <div class="auth-card">
+        <h2>Create account</h2>
+        <p>Set up credentials to get started.</p>
+        <form method="POST" class="auth-form">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Choose username" required />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Create password" required />
+            <button type="submit" class="primary">Register</button>
+        </form>
+        <p class="muted">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+</section>
+{% endblock %}

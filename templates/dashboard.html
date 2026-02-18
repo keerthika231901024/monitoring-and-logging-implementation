@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+    <h2>Operations Dashboard</h2>
+    <p>Live system performance and file activity overview.</p>
+</section>
+
+<section class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Files Processed</h3>
+        <p class="stat-value">{{ stats.total_files }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Total Errors</h3>
+        <p class="stat-value">{{ stats.total_errors }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Monitoring Status</h3>
+        <p class="stat-value">{{ 'Running' if is_monitoring else 'Stopped' }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Events Detected</h3>
+        <p class="stat-value">{{ event_count }}</p>
+    </div>
+</section>
+
+<section class="split-grid">
+    <div class="panel">
+        <h3>Real-Time Monitoring Control</h3>
+        <div class="info-list">
+            <div>
+                <span>Monitored Folder</span>
+                <strong>{{ monitored_folder }}</strong>
+            </div>
+            <div>
+                <span>Status</span>
+                <strong>{{ 'Running' if is_monitoring else 'Stopped' }}</strong>
+            </div>
+        </div>
+        {% if is_monitoring %}
+            <form method="POST" action="{{ url_for('stop_monitoring') }}" style="margin-top: 1rem;">
+                <button type="submit" class="primary" style="background: #e74c3c;">Stop Monitoring</button>
+            </form>
+        {% else %}
+            <form method="POST" action="{{ url_for('start_monitoring') }}" class="organizer-form" style="margin-top: 1rem;">
+                <label for="folder_path">Folder to monitor</label>
+                <input type="text" name="folder_path" id="folder_path" placeholder="C:\Users\YourName\Documents" required />
+                <button type="submit" class="primary">Start Monitoring</button>
+            </form>
+        {% endif %}
+    </div>
+    <div class="panel">
+        <h3>Live File Changes</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Event Type</th>
+                        <th>File Path</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in monitoring_logs %}
+                    <tr>
+                        <td>{{ log.timestamp }}</td>
+                        <td>
+                            {% if log.action == 'file_created' %}
+                                <span style="color: #2ecc71;">● File Created</span>
+                            {% elif log.action == 'folder_created' %}
+                                <span style="color: #2ecc71;">📁 Folder Created</span>
+                            {% elif log.action == 'file_deleted' %}
+                                <span style="color: #e74c3c;">● File Deleted</span>
+                            {% elif log.action == 'folder_deleted' %}
+                                <span style="color: #e74c3c;">📁 Folder Deleted</span>
+                            {% elif log.action == 'file_modified' %}
+                                <span style="color: #f39c12;">● File Modified</span>
+                            {% elif log.action == 'file_renamed' %}
+                                <span style="color: #3498db;">● File Renamed</span>
+                            {% elif log.action == 'folder_renamed' %}
+                                <span style="color: #3498db;">📁 Folder Renamed</span>
+                            {% else %}
+                                {{ log.action }}
+                            {% endif %}
+                        </td>
+                        <td style="font-size: 0.85rem;">{{ log.filename }}</td>
+                        <td>{{ log.status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No monitoring activity yet. Start monitoring a folder to see live file changes.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="panel">
+    <h3>Recent System Activity</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.timestamp }}</td>
+                    <td>{{ log.action }}</td>
+                    <td>{{ log.status }}</td>
+                    <td>{{ log.message }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No logs yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="split-grid">
+    <div class="panel">
+        <h3>Quick Upload</h3>
+        <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data" class="organizer-form">
+            <label for="file">Upload file</label>
+            <input type="file" name="file" id="file" required />
+            <button type="submit" class="primary">Upload</button>
+        </form>
+    </div>
+    <div class="panel">
+        <h3>Pending Uploads</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>File</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in pending_uploads %}
+                    <tr>
+                        <td>{{ log.timestamp }}</td>
+                        <td>{{ log.filename }}</td>
+                        <td>
+                            <div class="action-buttons" style="gap: 0.25rem;">
+                                <form method="POST" action="{{ url_for('confirm_organize', filename=log.filename) }}" style="display: inline;">
+                                    <button type="submit" class="action-btn confirm-btn" title="Organize this file">Organize</button>
+                                </form>
+                                <form method="POST" action="{{ url_for('reject_organize', filename=log.filename) }}" style="display: inline;">
+                                    <button type="submit" class="action-btn reject-btn" title="Keep in uploads folder">Keep</button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>{{ log.status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No pending uploads. Upload a file to get started!</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="panel">
+    <h3>Organized Files</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>File</th>
+                    <th>Organized To</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in organized_logs %}
+                <tr>
+                    <td>{{ log.timestamp }}</td>
+                    <td>{{ log.filename }}</td>
+                    <td style="color: #2ecc71; font-weight: 500;">{{ log.message }}</td>
+                    <td>{{ log.status }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No organized files yet. Upload a file and confirm organization!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <h3>File Deletion History</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Deletion Time</th>
+                    <th>File</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in delete_logs %}
+                <tr>
+                    <td>{{ log.timestamp }}</td>
+                    <td>{{ log.filename }}</td>
+                    <td>{{ log.status }}</td>
+                    <td>{{ log.message }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No deletions yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

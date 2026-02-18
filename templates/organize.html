@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+    <h2>File Organizer</h2>
+    <p>Organize files by type through folder path or upload.</p>
+</section>
+
+<section class="panel form-panel">
+    <form method="POST" enctype="multipart/form-data" class="organizer-form">
+        <label for="folder_path">Folder path</label>
+        <input type="text" name="folder_path" id="folder_path" placeholder="C:\\Users\\YourName\\Downloads" />
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <label for="files">Upload files</label>
+        <input type="file" name="files" id="files" multiple />
+
+        <button type="submit" class="primary">Run Organizer</button>
+    </form>
+
+    {% if summary %}
+    <div class="summary-card">
+        <h3>Run Summary</h3>
+        <p>Total files processed: <strong>{{ summary.total_files }}</strong></p>
+        <p>Total errors: <strong>{{ summary.total_errors }}</strong></p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
